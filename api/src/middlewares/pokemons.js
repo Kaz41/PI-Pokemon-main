@@ -6,6 +6,53 @@ const axios = require('axios');
 router.get("", async(req, res) => {
     let pokemonsAPI= {};
     let pokemonsDB;
+    let pokemonDB;
+    let pokemonAPI;
+    const {name} = req.query;
+
+    if(name) {
+        try {
+            pokemonDB = await Pokemon.findOne({where: {name: name}, include: {model: Type, attributes: ['name']}}).then(res =>{
+                return {
+                    name: res.name,
+                    weight: res.weight,
+                    height: res.height,
+                    hp: res.health,
+                    attack: res.attack,
+                    defense: res.attack,
+                    speed: res.speed,
+                    types: res.types.map(tipo => tipo.name)
+                }
+            })
+            
+            res.status(202).json(pokemonDB);
+        } catch (error) {
+            try {
+                pokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`).then(res => {
+                    let array = []
+                    res.data.types.forEach(element => {
+                        array.push(element.type.name)
+                    });
+                        
+                    return {
+                        name: res.data.name,
+                        weight: res.data.weight,
+                        height: res.data.height,
+                        hp: res.data.stats[0].base_stat,
+                        attack: res.data.stats[1].base_stat,
+                        defense: res.data.stats[2].base_stat,
+                        speed: res.data.stats[5].base_stat,
+                        types: array,
+                        sprite: res.data.sprites.front_default
+                    }
+                })
+                
+                res.status(202).json(pokemonAPI);
+            } catch (error) {
+                res.status(402).json({error: error.message})
+            }
+        }
+    }
     
     
     try {
@@ -82,20 +129,21 @@ router.get("/:idPokemon", async(req, res) => {
     try {
         if(idPokemon>39) {
             pokemon = await Pokemon.findByPk(idPokemon, {include: {model: Type, attributes: ['name']}}).then(res =>{
-                pokemon = res.map(poke =>({
-                    name: poke.name,
-                    weight: poke.weight,
-                    height: poke.height,
-                    hp: poke.hp,
-                    attack: poke.attack,
-                    defense: poke.attack,
-                    speed: poke.speed,
-                    types: poke.types.map(tipo => tipo.name)
-                }))
+                return {
+                    name: res.name,
+                    weight: res.weight,
+                    height: res.height,
+                    hp: res.health,
+                    attack: res.attack,
+                    defense: res.attack,
+                    speed: res.speed,
+                    types: res.types.map(tipo => tipo.name)
+                }
             })
+            res.status(201).json(pokemon)
         }
         else {
-            pokemon= await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`).then(res => {
+            pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`).then(res => {
                 let array = []
                 res.data.types.forEach(element => {
                     array.push(element.type.name)
@@ -114,11 +162,38 @@ router.get("/:idPokemon", async(req, res) => {
 
                 }
             })
+            res.status(201).json(pokemon)
         }
-        res.status(201).json(pokemon)        
     } catch (error) {
         res.status(401).json({error: error.message})
     }    
+})
+
+router.post("", async (req, res) => {
+    const {pokemon, type} = req.body;
+    const idcount = 40 + await Pokemon.count();
+    
+    if(!pokemon.name) {
+        res.status(403).json({error: "Falta informacion"})
+    }
+
+    try {
+        const poke = await Pokemon.create({
+            id: idcount,
+            name:pokemon.name,
+            weight:pokemon.weight,
+            height:pokemon.height,
+            health:pokemon.health,
+            attack:pokemon.attack,
+            defense:pokemon.defense,
+            speed:pokemon.speed
+        });
+        poke.addType(type)
+        res.status(203).json(poke)
+      } catch (error) {
+        console.log(error);
+        return res.status(404).send("Error en alguno de los datos provistos");
+      }
 })
 
 module.exports = router;
