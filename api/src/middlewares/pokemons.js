@@ -121,7 +121,7 @@ router.get("/:idPokemon", async(req, res) => {
     const idPokemon = req.params.idPokemon
 
     if(idPokemon<=0) {
-        res.status(400).json({error: "Error no id"})
+        res.status(401).json({error: "Error no id"})
     }
 
     let pokemon;
@@ -192,7 +192,7 @@ router.post("", async (req, res) => {
         res.status(203).json(poke)
       } catch (error) {
         console.log(error);
-        return res.status(404).send("Error en alguno de los datos provistos");
+        return res.status(403).send("Error en alguno de los datos provistos");
       }
 })
 
