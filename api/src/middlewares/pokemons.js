@@ -78,7 +78,7 @@ router.get("", async(req, res) => {
             })
         }
     
-        res.status(200).json({pokemon: [...Object.values(pokemonsAPI),...pokemonsDB]})
+        res.status(200).json([...Object.values(pokemonsAPI),...pokemonsDB])
     } catch (error) {
         res.status(400).json({error: error.message})
     }
