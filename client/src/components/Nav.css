@@ -1,0 +1,10 @@
+img {
+    height: 40px;
+    margin: 15px
+}
+
+div {
+    background-color: beige;
+    display: flex;
+    position: sticky;
+}

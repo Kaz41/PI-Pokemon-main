@@ -8,13 +8,13 @@ import Pokemon from './components/Pokemon';
 export default function App() {
 
   return (
-    <React.Fragment>
+    <>
       <Route path="/nav" component={Nav}/>
       <Route exact path = "/" render={
         () => <div className="App"> <h1>Henry Pokemon</h1> </div>}>
       </Route>
       <Route path="/pokemons" component={PokemonsCards}/>
       <Route path="/pokemon" component={Pokemon}/>
-    </React.Fragment>
+    </>
   );
 }
