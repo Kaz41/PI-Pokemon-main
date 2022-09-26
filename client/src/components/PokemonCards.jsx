@@ -1,17 +1,19 @@
-import React, {useState} from "react";
-const axios = require('axios');
 import PokemonCard from "./PokemonCard";
+import React, {useState} from "react";
+import { useSelector } from "react-redux";
+const axios = require('axios');
+
 
 export default function PokemonsCards() {
-    const pokemons = axios.get("http://localhost:3001/pokemons")
+    const pokemons = useSelector(state => state.pokemons)
 
     return (
-        <div class="pokemonCards">
+        <div className="pokemonCards">
             {pokemons.map(poke => <PokemonCard
-                img={poke.sprite}
-                name={poke.name}
-                types={poke.types}
-            />)}
+            name={poke.name}
+            types={poke.types}
+            sprite={poke.sprite}
+          /> )}
         </div>
     )
 }

@@ -8,15 +8,13 @@ router.get("", async (req, res) =>{
     try {
         if(await Type.count() > 0) {
             types = await Type.findAll({raw: true, attributes: ['name']})
-            console.log(types)
-            res.status(206).json({types})
+            res.status(206).json(types)
         } else {
             axios.get('https://pokeapi.co/api/v2/type').then(response =>{
                 types = response.data.results.map(tipo => ({
                     name: tipo.name
                 }))
-                console.log(types)
-                res.status(206).json({types})
+                res.status(206).json(types)
             })
         }
     } catch (error) {
