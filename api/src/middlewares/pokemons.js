@@ -17,7 +17,8 @@ router.get("", async(req, res) => {
                 return [{
                     id: res.id,
                     name: res.name,
-                    types: res.types.map(tipo => tipo.name)
+                    types: res.types.map(tipo => tipo.name),
+                    sprite: res.sprite
                 }]
                 
             })
@@ -47,11 +48,12 @@ router.get("", async(req, res) => {
     } else {
         //normal sin query todos los pokemons
         try {
-            Pokemon.findAll({attributes: ['name','id'], include: {model: Type, attributes: ['name']}}).then(res =>{
+            Pokemon.findAll({attributes: ['name','id','sprite'], include: {model: Type, attributes: ['name']}}).then(res =>{
                 pokemonsDB = res.map(poke =>({
                     id: poke.id,
                     name: poke.name,
-                    types: poke.types.map(tipo => tipo.name)
+                    types: poke.types.map(tipo => tipo.name),
+                    sprite: poke.sprite
                 }))
             });
 
@@ -131,7 +133,8 @@ router.get("/:idPokemon", async(req, res) => {
                     attack: res.attack,
                     defense: res.attack,
                     speed: res.speed,
-                    types: res.types.map(tipo => tipo.name)
+                    types: res.types.map(tipo => tipo.name),
+                    sprite: res.sprite
                 }
             })
             res.status(201).json(pokemon)
@@ -164,25 +167,30 @@ router.get("/:idPokemon", async(req, res) => {
 })
 
 router.post("", async (req, res) => {
-    const {pokemon, type} = req.body;
-    const idcount = 40 + await Pokemon.count();
-    
+    const {pokemon, types} = req.body;
+
     if(!pokemon.name) {
         res.status(403).json({error: "Falta informacion"})
     }
 
     try {
         const poke = await Pokemon.create({
-            id: idcount,
+            id: pokemon.id,
             name:pokemon.name,
             weight:pokemon.weight,
             height:pokemon.height,
             health:pokemon.health,
             attack:pokemon.attack,
             defense:pokemon.defense,
-            speed:pokemon.speed
+            speed:pokemon.speed,
+            sprite:pokemon.sprite
         });
-        poke.addType(type)
+        if(types.length > 1) {
+            poke.addType(types[0])
+            poke.addType(types[1])
+        } else {
+            poke.addType(types[0])
+        }
         res.status(203).json(poke)
       } catch (error) {
         console.log(error);

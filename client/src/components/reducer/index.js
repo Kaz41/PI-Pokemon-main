@@ -1,5 +1,5 @@
 import { auxPokemons } from "../actions";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTRAR,SEARCH_POKEMON,RESET} from "../actions/types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET, FILTER} from "../actions/types";
 
 const initialState = {
     types: [],
@@ -36,6 +36,27 @@ function reducer(state = initialState, action) {
                 ...state,
                 pokemons: state.pokemonsAux
             }
+        case FILTER: 
+            let result = state.pokemons.filter(poke => {
+                if(poke.types.length > 1 ) {
+                    if(poke.types[0] === action.payload || poke.types[1] === action.payload) {
+                        return poke;
+                    }
+                }
+                if(poke.types[0] === action.payload) {
+                    return poke
+                }
+            })
+            return {
+                ...state,
+                pokemons: result
+            }
+        case PUT_POKEMON: 
+            return {
+                ...state,
+                pokemons: state.pokemons.concat(action.payload),
+                pokemonsAux: state.pokemons.concat(action.payload)
+            }            
         default:
             return state;
     }

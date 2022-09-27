@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTRAR,SEARCH_POKEMON,RESET} from "./types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTER,SEARCH_POKEMON,RESET} from "./types";
 
 export const getTypes = () => {
     return async(dispatch) => {
@@ -48,5 +48,30 @@ export const searchPokemon = (name) => {
 export const resetPokemons = () => {
     return {
         type: RESET
+    }
+}
+
+export const filterPokemons = (type) => {
+    return {
+        type: FILTER,
+        payload: type
+    }
+}
+
+export const postPokemon = (pokemon, types) => {
+    return async(dispatch) =>{
+        const objeto = {pokemon: pokemon, types: types.map(t => t.id)}
+        console.log(objeto);
+        await axios.post('http://localhost:3001/pokemons', objeto)
+        const data = {
+            id: pokemon.id,
+            name: pokemon.name,
+            sprite: pokemon.sprite,
+            types: types.map(t => t.name)
+        }
+        dispatch({
+            type: PUT_POKEMON,
+            payload: data
+        });
     }
 }

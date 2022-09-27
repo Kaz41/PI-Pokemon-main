@@ -5,15 +5,22 @@ const axios = require('axios');
 
 router.get("", async (req, res) =>{
     let types
+    let count = 0;
     try {
         if(await Type.count() > 0) {
-            types = await Type.findAll({raw: true, attributes: ['name']})
+            types = await Type.findAll({raw: true})
             res.status(206).json(types)
         } else {
             axios.get('https://pokeapi.co/api/v2/type').then(response =>{
-                types = response.data.results.map(tipo => ({
-                    name: tipo.name
-                }))
+                types = response.data.results.map(tipo => {
+                    count++
+                    return {
+                        id: count,
+                        name: tipo.name
+                    }
+                })
+                const objeto = {types: types}
+                axios.post('http://localhost:3001/types',objeto)
                 res.status(206).json(types)
             })
         }

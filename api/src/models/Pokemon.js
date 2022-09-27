@@ -31,6 +31,9 @@ module.exports = (sequelize) => {
     weight: {
       type: DataTypes.DOUBLE
     },
+    sprite: {
+      type: DataTypes.STRING
+    }
   }, {
     timestamps: false
   });

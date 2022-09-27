@@ -6,6 +6,7 @@ import Pokemon from './components/Pokemon';
 import {useDispatch} from "react-redux";
 import { getTypes, getPokemons } from './components/actions';
 import NavBar from "./components/NavBar"
+import Formulario from './components/Formulario';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function App() {
       </Route>
       <Route path="/pokemons" component={PokemonsCards}/>
       <Route path="/pokemon/:id" component={Pokemon}/>
+      <Route path="/create" component={Formulario}/>
     </>
   );
 }
