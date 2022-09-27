@@ -6,6 +6,12 @@
   padding-top: 3%;
 }
 
+.Navs:visited {
+  color: inherit
+}
+
+.Navs:link { text-decoration: none; }
+
 h1 {
   -webkit-text-stroke: 2px white;
   font-size: 50px;

@@ -18,11 +18,11 @@ export default function App() {
       <Route exact path = "/" render={
         () => <div className="App">
                   <h1>Henry Pokemon</h1> 
-                  <Link to="/pokemons">INICIAR</Link>
+                  <Link to="/pokemons" className="Navs">INICIAR</Link>
               </div>}>
       </Route>
       <Route path="/pokemons" component={PokemonsCards}/>
-      <Route path="/pokemon" component={Pokemon}/>
+      <Route path="/pokemon/:id" component={Pokemon}/>
     </>
   );
 }

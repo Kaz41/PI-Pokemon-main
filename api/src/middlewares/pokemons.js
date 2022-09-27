@@ -10,6 +10,7 @@ router.get("", async(req, res) => {
     let pokemonAPI;
     const {name} = req.query;
 
+    //con query
     if(name) {
         try {
             pokemonDB = await Pokemon.findOne({where: {name: name}, include: {model: Type, attributes: ['name']}}).then(res =>{
@@ -54,10 +55,11 @@ router.get("", async(req, res) => {
         }
     }
     
-    
+    //normal sin query todos los pokemons
     try {
-        Pokemon.findAll({attributes: ['name'], include: {model: Type, attributes: ['name']}}).then(res =>{
+        Pokemon.findAll({attributes: ['name','id'], include: {model: Type, attributes: ['name']}}).then(res =>{
             pokemonsDB = res.map(poke =>({
+                id: poke.id,
                 name: poke.name,
                 types: poke.types.map(tipo => tipo.name)
             }))
@@ -71,6 +73,7 @@ router.get("", async(req, res) => {
                 });
     
                 return {
+                    id: res.data.id,
                     name: res.data.name,
                     types: array,
                     sprite: res.data.sprites.front_default
