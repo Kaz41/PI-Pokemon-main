@@ -5,6 +5,7 @@ import PokemonsCards from './components/PokemonCards';
 import Pokemon from './components/Pokemon';
 import {useDispatch} from "react-redux";
 import { getTypes, getPokemons } from './components/actions';
+import NavBar from "./components/NavBar"
 
 export default function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function App() {
 
   return (
     <>
+      <NavBar></NavBar>
       <Route exact path = "/" render={
         () => <div className="App">
                   <h1>Henry Pokemon</h1> 

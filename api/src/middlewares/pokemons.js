@@ -14,16 +14,12 @@ router.get("", async(req, res) => {
     if(name) {
         try {
             pokemonDB = await Pokemon.findOne({where: {name: name}, include: {model: Type, attributes: ['name']}}).then(res =>{
-                return {
+                return [{
+                    id: res.id,
                     name: res.name,
-                    weight: res.weight,
-                    height: res.height,
-                    hp: res.health,
-                    attack: res.attack,
-                    defense: res.attack,
-                    speed: res.speed,
                     types: res.types.map(tipo => tipo.name)
-                }
+                }]
+                
             })
             
             res.status(202).json(pokemonDB);
@@ -35,17 +31,12 @@ router.get("", async(req, res) => {
                         array.push(element.type.name)
                     });
                         
-                    return {
+                    return [{
+                        id: res.data.id,
                         name: res.data.name,
-                        weight: res.data.weight,
-                        height: res.data.height,
-                        hp: res.data.stats[0].base_stat,
-                        attack: res.data.stats[1].base_stat,
-                        defense: res.data.stats[2].base_stat,
-                        speed: res.data.stats[5].base_stat,
                         types: array,
                         sprite: res.data.sprites.front_default
-                    }
+                    }]
                 })
                 
                 res.status(202).json(pokemonAPI);
@@ -53,38 +44,38 @@ router.get("", async(req, res) => {
                 res.status(402).json({error: error.message})
             }
         }
-    }
-    
-    //normal sin query todos los pokemons
-    try {
-        Pokemon.findAll({attributes: ['name','id'], include: {model: Type, attributes: ['name']}}).then(res =>{
-            pokemonsDB = res.map(poke =>({
-                id: poke.id,
-                name: poke.name,
-                types: poke.types.map(tipo => tipo.name)
-            }))
-        });
-    
-        for(let i=1; i<=40; i++) {
-            pokemonsAPI[i] = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => {
-                let array = []
-                res.data.types.forEach(element => {
-                    array.push(element.type.name)
-                });
-    
-                return {
-                    id: res.data.id,
-                    name: res.data.name,
-                    types: array,
-                    sprite: res.data.sprites.front_default
-                }
-            })
+    } else {
+        //normal sin query todos los pokemons
+        try {
+            Pokemon.findAll({attributes: ['name','id'], include: {model: Type, attributes: ['name']}}).then(res =>{
+                pokemonsDB = res.map(poke =>({
+                    id: poke.id,
+                    name: poke.name,
+                    types: poke.types.map(tipo => tipo.name)
+                }))
+            });
+
+            for(let i=1; i<=40; i++) {
+                pokemonsAPI[i] = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => {
+                    let array = []
+                    res.data.types.forEach(element => {
+                        array.push(element.type.name)
+                    });
+
+                    return {
+                        id: res.data.id,
+                        name: res.data.name,
+                        types: array,
+                        sprite: res.data.sprites.front_default
+                    }
+                })
+            }
+
+            res.status(200).json([...Object.values(pokemonsAPI),...pokemonsDB])
+        } catch (error) {
+            res.status(400).json({error: error.message})
         }
-    
-        res.status(200).json([...Object.values(pokemonsAPI),...pokemonsDB])
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
+    }   
 
     /*
     Pokemon.findAll({attributes: ['name'], include: {model: Type, attributes: ['name']}}).then(res =>{
