@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import {Link, Route} from 'react-router-dom';
+import {useHistory, Route} from 'react-router-dom';
 import PokemonsCards from './components/PokemonCards';
 import Pokemon from './components/Pokemon';
 import {useDispatch} from "react-redux";
@@ -9,11 +9,18 @@ import NavBar from "./components/NavBar"
 import Formulario from './components/Formulario';
 
 export default function App() {
+  const history = useHistory();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons());
   }, []);
+
+
+  function handleClick() {
+    history.push("/pokemons");
+  }
 
   return (
     <>
@@ -21,7 +28,7 @@ export default function App() {
       <Route exact path = "/" render={
         () => <div className="App">
                   <h1 id='Titulo'>Henry Pokemon</h1> 
-                  <Link to="/pokemons" id='Link'>INICIAR</Link>
+                  <button onClick={handleClick} id='button'>INICIAR</button>
               </div>}>
       </Route>
       <Route path="/pokemons" component={PokemonsCards}/>

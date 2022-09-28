@@ -59,7 +59,7 @@ function reducer(state = initialState, action) {
                         if(a.name > b.name) {
                             return 1
                         }
-                        if(a.name > b.name) {
+                        if(a.name < b.name) {
                             return -1
                         }
                         return 0
@@ -70,7 +70,7 @@ function reducer(state = initialState, action) {
                         if(a.name > b.name) {
                             return -1
                         }
-                        if(a.name > b.name) {
+                        if(a.name < b.name) {
                             return 1
                         }
                         return 0
@@ -81,7 +81,7 @@ function reducer(state = initialState, action) {
                         if(a.attack > b.attack) {
                             return 1
                         }
-                        if(a.attack > b.attack) {
+                        if(a.attack < b.attack) {
                             return -1
                         }
                         return 0
@@ -92,7 +92,7 @@ function reducer(state = initialState, action) {
                         if(a.attack > b.attack) {
                             return -1
                         }
-                        if(a.attack > b.attack) {
+                        if(a.attack < b.attack) {
                             return 1
                         }
                         return 0

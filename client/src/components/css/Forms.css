@@ -1,0 +1,73 @@
+.FormContainer h1{
+    text-align: center;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 6%;
+}
+
+.Formulario {
+    background-color: rgba(200, 200, 200, 0.75);
+    height: 85%;
+    width: 40%;
+    border: solid black 5px;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    margin-top: 1%;
+    padding-top: 3%;
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.Formulario input {
+    align-self: center;
+    width: 60%;
+}
+
+.Formulario select {
+    align-self: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 30%;
+}
+
+.FormType {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+}
+
+#Sumit {
+    
+}
+
+.GoBack {
+    margin-top: 6%;
+    margin-left: 1%;
+    position: fixed;
+    color: black;
+    border: solid black 2px;
+    border-radius: 10%;
+}
+
+.GoBack:visited {
+    color: inherit;
+}
+
+.GoBack:link {
+    text-decoration: none;
+}

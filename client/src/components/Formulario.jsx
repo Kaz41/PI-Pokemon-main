@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postPokemon } from "./actions"
-import {Link} from "react-router-dom"
+import { postPokemon } from "./actions";
+import {Link} from "react-router-dom";
+import "./css/Forms.css";
 
 export default function Formulario() {
     const [tipo1, setTipo1] = useState();
@@ -75,10 +76,10 @@ export default function Formulario() {
     }
 
     return (
-        <div>
-            <Link to="/pokemons" >VOLVER</Link>
-            <h1>Formulario Pokemon</h1>
-            <form className="TypesFilter" onSubmit={(e) => {
+        <div className="FormContainer">
+            <Link to="/pokemons" className="GoBack">←VOLVER</Link>
+            <h1 id="Titulo">Formulario Pokemon</h1>
+            <form className="Formulario" onSubmit={(e) => {
                     e.preventDefault();
                     postear();
                 } 
@@ -100,19 +101,21 @@ export default function Formulario() {
                 <label>Sprite</label>
                 <input id="FormSprite" type="ulr" placeholder="Sprite" required="true" onChange={(evento) => handdleChange(evento)}/>
                 <label>Tipos</label>
-                <select id="FormType1" required="true" onChange={(evento) => handdleChange(evento)}>
-                    <option value=""></option>
-                    {types.map(t => <option value={t.name}>
-                        {t.name}
-                    </option>)}
-                </select>
-                <select id="FormType2" onChange={(evento) => handdleChange(evento)}>
-                    <option value=""></option>
-                    {types.map(t => <option value={t.name}>
-                        {t.name}
-                    </option>)}
-                </select>
-                <input type="submit"/>
+                <div className="FormType">
+                    <select id="FormType1" required="true" onChange={(evento) => handdleChange(evento)}>
+                        <option value=""></option>
+                        {types.map(t => <option value={t.name}>
+                            {t.name}
+                        </option>)}
+                    </select>
+                    <select id="FormType2" onChange={(evento) => handdleChange(evento)}>
+                        <option value=""></option>
+                        {types.map(t => <option value={t.name}>
+                            {t.name}
+                        </option>)}
+                    </select>
+                </div>                
+                <input id="Sumit" type="submit"/>
             </form>
         </div>
     )
