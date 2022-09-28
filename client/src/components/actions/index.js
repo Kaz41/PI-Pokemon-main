@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTER,SEARCH_POKEMON,RESET} from "./types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTER,SEARCH_POKEMON,RESET,SORT} from "./types";
 
 export const getTypes = () => {
     return async(dispatch) => {
@@ -55,6 +55,13 @@ export const filterPokemons = (type) => {
     return {
         type: FILTER,
         payload: type
+    }
+}
+
+export const sortPokemons = (order) => {
+    return {
+        type: SORT,
+        payload: order
     }
 }
 

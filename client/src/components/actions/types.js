@@ -5,3 +5,4 @@ export const PUT_POKEMON = "PUT_POKEMON";
 export const FILTER = "FILTER";
 export const SEARCH_POKEMON = "SEARCH_POKEMON";
 export const RESET = "RESET";
+export const SORT = "SORT";

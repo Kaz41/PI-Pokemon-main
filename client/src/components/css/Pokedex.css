@@ -1,0 +1,66 @@
+.PokedexBox {
+    padding-top: 6%;
+    padding-bottom: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    height: 120%;
+}
+
+.Pokedex {
+    background-color: rgba(200, 200, 200, 0.75);
+    height: 100%;
+    width: 100%;
+    border: solid black 5px;
+    border-radius: 2%;
+}
+
+.AjustesPokedex {
+    border-bottom: solid black;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#labelFiltro {
+    font-weight: 700;
+}
+
+#labelOrder {
+    font-weight: 700;
+}
+
+.AjusteContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+.SearchBarContent {
+    width: 50%;
+}
+
+.Cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap:wrap;
+}
+
+.PaginationContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Paginacion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.pagebutton {
+    margin-left: 5%;
+    margin-right: 5%;
+}

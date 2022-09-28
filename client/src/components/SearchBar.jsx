@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPokemon } from "./actions"
+import "./css/SearchBar.css"
 
 export default function SearchBar() {
     const [texto, setTexto] = useState("");
@@ -19,12 +20,13 @@ export default function SearchBar() {
             }>
 
             <input 
+                id="barra"
                 type={"text"}
                 placeholder="Buscar Pokemon..."
                 onChange={(evento) => handdleChange(evento)}
             />
 
-            <input type="submit" value="Buscar" />
+            <input id="buscar" type="submit" value="Buscar" />
         
         </form>
     )

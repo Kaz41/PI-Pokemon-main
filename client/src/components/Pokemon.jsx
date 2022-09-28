@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getPokemon } from "./actions";
+import "./css/Pokemon.css"
 
 export default function Pokemon() {
     const state = useSelector(state => state);
@@ -24,10 +25,10 @@ export default function Pokemon() {
     }, []);
 
     return (
-        <div>
+        <div className="Pokemon">
             <Link to="/pokemons" className="Navs">VOLVER</Link>
-            <img src={state.pokemon.sprite} alt="sprite" />
-            <div>
+            <img className="Sprite" src={state.pokemon.sprite} alt="sprite" />
+            <div className="Stats">
                 <h1>Nombre: {state.pokemon.name}</h1>
                 <div>
                     <h2>Tipos:</h2>

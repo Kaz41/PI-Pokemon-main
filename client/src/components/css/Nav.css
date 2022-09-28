@@ -4,13 +4,36 @@
 }
 
 .NavBar {
-    background-color: beige;
+    background-color: rgb(50, 50, 50);
     display: flex;
-    flex-direction:column;
-    position: sticky;
+    flex-direction:row;
+    position: fixed;
+    width: 100%;
+}
+
+#Henry {
+    color: white;
 }
 
 .inicio {
     display: flex;
     flex-direction:row;
 }
+
+#create {
+    display: flex;
+    position: absolute;
+    color: white;
+    right: 0px;
+    width: 10%;
+    height: 100%;
+    font-size: 17px;
+    justify-content: center;
+    align-items: center;
+}
+
+#create:visited {
+    color: white
+}
+
+#create:link { text-decoration: none; }

@@ -18,7 +18,8 @@ router.get("", async(req, res) => {
                     id: res.id,
                     name: res.name,
                     types: res.types.map(tipo => tipo.name),
-                    sprite: res.sprite
+                    sprite: res.sprite,
+                    attack: res.attack
                 }]
                 
             })
@@ -36,7 +37,8 @@ router.get("", async(req, res) => {
                         id: res.data.id,
                         name: res.data.name,
                         types: array,
-                        sprite: res.data.sprites.front_default
+                        sprite: res.data.sprites.front_default,
+                        attack: res.data.stats[1].base_stat
                     }]
                 })
                 
@@ -48,12 +50,13 @@ router.get("", async(req, res) => {
     } else {
         //normal sin query todos los pokemons
         try {
-            Pokemon.findAll({attributes: ['name','id','sprite'], include: {model: Type, attributes: ['name']}}).then(res =>{
+            Pokemon.findAll({attributes: ['name','id','sprite','attack'], include: {model: Type, attributes: ['name']}}).then(res =>{
                 pokemonsDB = res.map(poke =>({
                     id: poke.id,
                     name: poke.name,
                     types: poke.types.map(tipo => tipo.name),
-                    sprite: poke.sprite
+                    sprite: poke.sprite,
+                    attack: poke.attack
                 }))
             });
 
@@ -68,7 +71,8 @@ router.get("", async(req, res) => {
                         id: res.data.id,
                         name: res.data.name,
                         types: array,
-                        sprite: res.data.sprites.front_default
+                        sprite: res.data.sprites.front_default,
+                        attack: res.data.stats[1].base_stat
                     }
                 })
             }

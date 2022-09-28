@@ -8,9 +8,9 @@ export default function Nav() {
         <div className="NavBar">
             <div className="inicio">
                 <img className="logo" src={Logo} alt="logo" />
-                <h2>Henry Pokemon</h2>
+                <h2 id="Henry">Henry Pokemon</h2>
             </div>
-            <Link to="/create">CREAR</Link>
+            <Link id="create" to="/create">Crear Pokemon</Link>
         </div>
     );
 }

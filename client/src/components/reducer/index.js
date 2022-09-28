@@ -1,5 +1,5 @@
 import { auxPokemons } from "../actions";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET, FILTER} from "../actions/types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET,FILTER,SORT} from "../actions/types";
 
 const initialState = {
     types: [],
@@ -23,8 +23,8 @@ function reducer(state = initialState, action) {
         case GET_POKEMONS:
             return {
                 ...state,
+                pokemonsAux: action.payload,
                 pokemons: action.payload,
-                pokemonsAux: action.payload
             }    
         case SEARCH_POKEMON: 
             return {
@@ -51,11 +51,63 @@ function reducer(state = initialState, action) {
                 ...state,
                 pokemons: result
             }
+        case SORT:
+            let sort = state.pokemons.slice()
+            switch(action.payload) {
+                case "ND": 
+                    sort.sort((a, b) => {
+                        if(a.name > b.name) {
+                            return 1
+                        }
+                        if(a.name > b.name) {
+                            return -1
+                        }
+                        return 0
+                    })
+                    break;
+                case "NA":
+                    sort.sort((a, b) => {
+                        if(a.name > b.name) {
+                            return -1
+                        }
+                        if(a.name > b.name) {
+                            return 1
+                        }
+                        return 0
+                    })
+                    break;
+                case "AD": 
+                    sort.sort((a, b) => {
+                        if(a.attack > b.attack) {
+                            return 1
+                        }
+                        if(a.attack > b.attack) {
+                            return -1
+                        }
+                        return 0
+                    })
+                    break;
+                case "AA":
+                    sort.sort((a, b) => {
+                        if(a.attack > b.attack) {
+                            return -1
+                        }
+                        if(a.attack > b.attack) {
+                            return 1
+                        }
+                        return 0
+                    })
+                    break;
+            }
+            return {
+                ...state,
+                pokemons: sort
+            }
         case PUT_POKEMON: 
             return {
                 ...state,
-                pokemons: state.pokemons.concat(action.payload),
-                pokemonsAux: state.pokemons.concat(action.payload)
+                pokemonsAux: state.pokemons.concat(action.payload),
+                pokemons: state.pokemons.concat(action.payload)
             }            
         default:
             return state;

@@ -76,8 +76,8 @@ export default function Formulario() {
 
     return (
         <div>
-            <h1>Formulario Pokemon</h1>
             <Link to="/pokemons" >VOLVER</Link>
+            <h1>Formulario Pokemon</h1>
             <form className="TypesFilter" onSubmit={(e) => {
                     e.preventDefault();
                     postear();

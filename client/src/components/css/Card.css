@@ -1,0 +1,42 @@
+#Card {
+    color: black;
+    background-color: white;
+    width: 175px;
+    height: 225px;
+    border-radius: 10%;
+    cursor: pointer;
+    margin: 0.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Card:visited {
+    color: black;
+}
+
+#Card:link { text-decoration: none; }
+
+#sprite {
+    padding-top: 7%;
+}
+
+#name {
+    margin: 0;
+    font-size: 30px;
+    width: fit-content;
+}
+
+.TypesCard {
+    display: flex;
+    font-size: 12px;
+    padding-left: 0;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.typeCard {
+    margin: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+}
