@@ -18,7 +18,7 @@
     width: 50%;
 }
 
-.GoBack {
+#GoBack {
     margin-top: 1%;
     margin-left: 1%;
     position: absolute;
@@ -27,11 +27,11 @@
     border-radius: 10%;
 }
 
-.GoBack:visited {
+#GoBack:visited {
     color: inherit;
 }
 
-.GoBack:link {
+#GoBack:link {
     text-decoration: none;
 }
 
@@ -67,6 +67,7 @@
     padding-top: 2%;
     text-decoration: none;
     display: flex;
+    align-items: center;
 }
 
 .typesPokemon h2 {
@@ -76,12 +77,11 @@
 }
 
 .typesPokemon h3 {
+    font-size: 25px;
     border-radius: 10%;
-    border: solid black 3px;
     text-decoration: none;
     display: flex;
     align-items: center;
     margin: 0;
     margin-left: 5%;
-    padding-bottom: 1.5%;
 }

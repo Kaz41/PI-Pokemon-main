@@ -26,7 +26,7 @@ export default function Pokemon() {
 
     return (
         <div className="Pokemon">
-            <Link to="/pokemons" className="GoBack">←VOLVER</Link>
+            <Link to="/pokemons" id="GoBack">←VOLVER</Link>
             <img className="Sprite" src={state.pokemon.sprite} alt="sprite" />
             <div className="Stats">
                 <div className="NombreContent">
