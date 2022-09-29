@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTER,SEARCH_POKEMON,RESET,SORT} from "./types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,FILTER,SEARCH_POKEMON,RESET,SORT,RESET_POKEMON} from "./types";
 
 export const getTypes = () => {
     return async(dispatch) => {
@@ -80,5 +80,12 @@ export const postPokemon = (pokemon, types) => {
             type: PUT_POKEMON,
             payload: data
         });
+    }
+}
+
+export const resetPokemon = () => {
+    return {
+        type: RESET_POKEMON,
+        payload: {}
     }
 }

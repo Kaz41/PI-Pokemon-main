@@ -1,5 +1,5 @@
 import { auxPokemons } from "../actions";
-import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET,FILTER,SORT} from "../actions/types";
+import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET,FILTER,SORT,RESET_POKEMON} from "../actions/types";
 
 const initialState = {
     types: [],
@@ -108,7 +108,12 @@ function reducer(state = initialState, action) {
                 ...state,
                 pokemonsAux: state.pokemons.concat(action.payload),
                 pokemons: state.pokemons.concat(action.payload)
-            }            
+            }
+        case RESET_POKEMON:
+            return {
+                ...state,
+                pokemon: action.payload
+            }       
         default:
             return state;
     }

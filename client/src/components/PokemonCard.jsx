@@ -1,11 +1,15 @@
 import React from "react";
 import "./css/Card.css"
+import {useDispatch} from "react-redux";
 import { useHistory } from "react-router-dom";
+import { resetPokemon } from "./actions";
 
 export default function PokemonCard({id,name, sprite, types}) {
     const history = useHistory();
+    const dispatch = useDispatch()
 
     function handleClick() {
+        dispatch(resetPokemon())
         history.push(`pokemon/${id}`);
     }
 

@@ -6,3 +6,4 @@ export const FILTER = "FILTER";
 export const SEARCH_POKEMON = "SEARCH_POKEMON";
 export const RESET = "RESET";
 export const SORT = "SORT";
+export const RESET_POKEMON = "RESET_POKEMON";
