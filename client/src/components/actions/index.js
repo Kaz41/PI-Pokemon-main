@@ -36,12 +36,15 @@ export const getPokemon = (id) => {
 
 export const searchPokemon = (name) => {
     return async(dispatch) =>{
-        const pokemon = await axios(`http://localhost:3001/pokemons?name=${name}`).then(response => response.data)
-
-        dispatch({
-            type: SEARCH_POKEMON,
-            payload: pokemon
-        });
+        try {
+            const pokemon = await axios(`http://localhost:3001/pokemons?name=${name}`).then(response => response.data)
+            dispatch({
+                type: SEARCH_POKEMON,
+                payload: pokemon
+            });
+        } catch (error) {
+            alert("No se encontro dicho pokemon")
+        }
     }
 }
 
