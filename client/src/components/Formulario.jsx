@@ -6,9 +6,10 @@ import {Link} from "react-router-dom";
 import "./css/Forms.css";
 
 export default function Formulario() {
+    const [texto, setTexto] = useState("Nombre debe ser rellenado");
     const [tipo1, setTipo1] = useState();
     const [tipo2, setTipo2] = useState();
-    const [nombre, setNombre] = useState();
+    const [nombre, setNombre] = useState("");
     const [ataque, setAtaque] = useState();
     const [defensa, setDefensa] = useState();
     const [velocidad, setVelocidad] = useState();
@@ -52,7 +53,13 @@ export default function Formulario() {
 
     const handdleChange = (evento) => {
         switch(evento.target.id) {
-            case "FromNombre": setNombre(evento.target.value);
+            case "FromNombre": 
+                if(evento.target.value === "") {
+                    setTexto("Nombre debe ser rellenado")
+                } else {
+                    setTexto("")
+                }
+                setNombre(evento.target.value);
                 break;
             case "FormHP": setHP(evento.target.value);
                 break;
@@ -85,6 +92,7 @@ export default function Formulario() {
                 } 
             }>
                 <label>Nombre</label>
+                <label id="NombreObligatorio">{texto}</label>
                 <input id="FromNombre" type="text" placeholder="Nombre" required="true" onChange={(evento) => handdleChange(evento)}/>
                 <label>Altura</label>
                 <input id="FormAltura" type="number" placeholder="Altura" required="true" onChange={(evento) => handdleChange(evento)}/>
