@@ -127,7 +127,7 @@ router.get("/:idPokemon", async(req, res) => {
     let pokemon;
 
     try {
-        if(idPokemon>39) {
+        if(idPokemon>40) {
             pokemon = await Pokemon.findByPk(idPokemon, {include: {model: Type, attributes: ['name']}}).then(res =>{
                 return {
                     name: res.name,
