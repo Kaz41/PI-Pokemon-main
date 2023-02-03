@@ -12,7 +12,7 @@ export default function Pokemon() {
     let tipos = []
 
     state.pokemons.forEach(element => {
-        if(element.id == id) {
+        if(element.id === id) {
             tipos.push(element.types[0])
             if(element.types.length > 1) {
                 tipos.push(element.types[1])
@@ -22,7 +22,7 @@ export default function Pokemon() {
 
     useEffect(() => {
         dispatch(getPokemon(id));
-    }, []);
+    });
 
     return (
         <div className="Pokemon">

@@ -15,6 +15,7 @@ export default function App() {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

@@ -1,4 +1,3 @@
-import { auxPokemons } from "../actions";
 import {GET_TYPES,GET_POKEMON,GET_POKEMONS,PUT_POKEMON,SEARCH_POKEMON,RESET,FILTER,SORT,RESET_POKEMON} from "../actions/types";
 
 const initialState = {
@@ -37,16 +36,7 @@ function reducer(state = initialState, action) {
                 pokemons: state.pokemonsAux
             }
         case FILTER: 
-            let result = state.pokemons.filter(poke => {
-                if(poke.types.length > 1 ) {
-                    if(poke.types[0] === action.payload || poke.types[1] === action.payload) {
-                        return poke;
-                    }
-                }
-                if(poke.types[0] === action.payload) {
-                    return poke
-                }
-            })
+            let result = state.pokemons.filter(poke => poke.types[0] === action.payload || poke.types[1] === action.payload)
             return {
                 ...state,
                 pokemons: result
@@ -97,6 +87,8 @@ function reducer(state = initialState, action) {
                         }
                         return 0
                     })
+                    break;
+                default:
                     break;
             }
             return {

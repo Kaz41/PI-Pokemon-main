@@ -35,17 +35,9 @@ export default function Formulario() {
         }
         let tipos = []
 
-        types.map(t => {
-            if(t.name === tipo1){
-                tipos.push({id: t.id, name: tipo1})
-            }
-        })
+        tipos = types.filter(t => t.name === tipo1)
         if(tipo2) {
-            types.map(t => {
-                if(t.name === tipo2){
-                    tipos.push({id: t.id, name: tipo2})
-                }
-            })
+            tipos = types.filter(t => t.name === tipo2)
         }
         console.log(pokemon)
         dispatch(postPokemon(pokemon,tipos))
@@ -78,6 +70,8 @@ export default function Formulario() {
             case "FormType1": setTipo1(evento.target.value);
                 break;
             case "FormType2": setTipo2(evento.target.value);
+                break;
+            default:
                 break;
         }
     }

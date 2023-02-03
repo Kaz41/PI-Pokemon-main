@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterPokemons, resetPokemons } from "./actions"
 
